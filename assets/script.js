@@ -1,3 +1,4 @@
+// DOM ELEMENTS 
 const startButton = document.getElementById('start-btn')
 const nextButton = document.getElementById('next-btn')
 const questionContainerElement = document.getElementById('question-container')
@@ -5,13 +6,13 @@ const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
 
 let shuffledQuestions, currentQuestionIndex
-
+// event listeners for the start/next button to navigate through the quiz.
 startButton.addEventListener('click', startGame)
 nextButton.addEventListener('click', () => {
   currentQuestionIndex++
   setNextQuestion()
 })
-
+// startgame function hides the start button on click and calls on the setNextQuestion Function 
 function startGame() {
   startButton.classList.add('hide')
   shuffledQuestions = questions.sort(() => Math.random() - .5)
@@ -19,10 +20,11 @@ function startGame() {
   questionContainerElement.classList.remove('hide')
   setNextQuestion()
 }
-
+// sets the 1st question and following questions
 function setNextQuestion() {
   resetState()
   showQuestion(shuffledQuestions[currentQuestionIndex])
+  countDown()
 }
 
 function showQuestion(question) {
@@ -112,75 +114,16 @@ const questions = [
     ]
   }
 ]
-
-
-
-
-
-// const startButton = document.getElementById('start-btn')
-// const nextButton = document.getElementById('next-btn')
-// const questionButton = document.getElementById('question-container')
-// startButton.addEventListener('click', startGame)
-
-// function startGame(){
-//     startButton.classList.add('hide');
-//     nextButton.classList.remove('hide');
-//     questionButton.classList.remove('hide');
-// }
-
-// function setNextQuestion(){
-
-// }
-
-// function selectAnswer(){
-
-    
-// }
-
-// // const questionsArr1 = [qeustion1, question2, question3]
-
-// const questionsArr2 = [
-//     {
-//         question1: 'question text goes here',
-//         answer1: {
-//             answer: 'answer text1',
-//             boolean: false
-//         },
-//         answer2: {
-//             answer: 'answer text2',
-//             boolean: false
-//         },
-//         answer3: {
-//             answer: 'answer text3',
-//             boolean: true,
-//             array: [1, 2, 3]
-//         },
-//         answer4: {
-//             answer: 'answer text4',
-//             boolean: false
-//         }
-
-//     },
-//     {
-//         question2: 'question2 text goes here',
-//         answer1: {
-//             answer: 'answer text',
-//             boolean: false
-//         },
-//         answer2: {
-//             answer: 'answer text',
-//             boolean: false
-//         },
-//         answer3: {
-//             answer: 'answer text',
-//             boolean: true
-//         },
-//         answer4: {
-//             answer: 'answer text',
-//             boolean: false
-//         }
-
-//     }
-// ]
-
-// console.log(questionsArr2[0].answer3.array[1])
+// alet box is displaying at 2 seconds instead of 0?
+function countDown(){
+var count = 15;
+var interval = setInterval(function(){
+  document.getElementById('count').innerHTML=count;
+  count--;
+  if (count === 0){
+    clearInterval(interval);
+    document.getElementById('count').innerHTML='Done';
+    alert("You're out of time!");
+  }
+}, 1000);
+}
